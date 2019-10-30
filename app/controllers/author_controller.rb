@@ -1,4 +1,8 @@
 class AuthorController < ApplicationController
+  def index
+    @authors = Author.all
+  end
+
   def new
   end
 

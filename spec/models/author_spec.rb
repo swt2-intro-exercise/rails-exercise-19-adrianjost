@@ -8,4 +8,9 @@ RSpec.describe Author, type: :model do
     expect(author.homepage).to(eq('turing.com'))
     expect(author.name).to(eq('Alan Turing'))
   end
+
+  it "should not allow authors without last name" do
+    author = Author.new(first_name:'Alan', homepage:'turing.com')
+    expect(author).to_not be_valid
+  end
 end

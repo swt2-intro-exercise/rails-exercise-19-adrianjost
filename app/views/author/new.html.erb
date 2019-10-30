@@ -2,12 +2,12 @@
 
 
 
-<%= form_with scope: :author, local: true do |form| %>
+<%= form_with scope: :author, url: author_index_path, local: true do |form| %>
   <p>
     <%= form.label :first_name %><br>
     <%= form.text_field :first_name %>
   </p>
- 
+
   <p>
     <%= form.label :last_name %><br>
     <%= form.text_field :last_name %>
@@ -17,7 +17,7 @@
     <%= form.label :homepage %><br>
     <%= form.text_field :homepage %>
   </p>
- 
+
   <p>
     <%= form.submit %>
   </p>

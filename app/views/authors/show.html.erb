@@ -5,12 +5,16 @@
 
         <p>
           <strong>Name</strong>
-          <%= @author.name %>
+          <%= @author.name %><br>
+          <%= @author.first_name %><br>
+          <%= @author.last_name %>
         </p>
 
         <p>
          <strong>Homepage</strong>
          <%= @author.homepage %>
         </p>
+
+        <%= link_to 'Edit', edit_author_path(@author) %>
     </body>
 </html>

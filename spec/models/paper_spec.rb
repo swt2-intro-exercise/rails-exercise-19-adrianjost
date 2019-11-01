@@ -32,4 +32,10 @@ RSpec.describe Paper, type: :model do
     paper = Paper.new(title:"Some title", venue:"Some venue", year:19.3)
     expect(paper).to_not be_valid
   end
+
+  it "should have many authors" do
+    paper = Paper.new(title:"Some title", venue:"Some venue", year:2019)
+    paper.save
+    expect(paper.authors).to be_empty
+  end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Show Papers page", type: :feature do
+describe "show papers page", type: :feature do
   before do
     @paper = FactoryBot.create :paper
   end

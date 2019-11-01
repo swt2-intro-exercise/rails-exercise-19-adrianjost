@@ -22,9 +22,9 @@ class PapersController < ApplicationController
   # POST /papers
   def create
     begin
-      @paper = Paper.new(paper_params)
-
-      if @paper.save
+      params = paper_params
+      @paper = Paper.new(params)
+      if @paper.save(params) and update_paper_authors
         redirect_to @paper, notice: 'Paper was successfully created.'
       else
         render :new
@@ -37,7 +37,8 @@ class PapersController < ApplicationController
   # PATCH/PUT /papers/1
   def update
     begin
-      if @paper.update(paper_params)
+      params = paper_params
+      if @paper.update(params) and update_paper_authors
         redirect_to @paper, notice: 'Paper was successfully updated.'
       else
         render :edit
@@ -61,6 +62,19 @@ class PapersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def paper_params
-      params.require(:paper).permit(:title, :venue, :year)
+      params.require(:paper).permit(:title, :venue, :year, author_ids: [])
+    end
+
+    #update author manually (only way I got it working)
+    def update_paper_authors
+      author_ids = paper_params["author_ids"]
+        if author_ids
+          #remove hidden field from array
+          author_ids.shift
+          authors = Author.find(author_ids)
+          @paper.authors = authors
+          return @paper.save
+        end
+        return true
     end
 end

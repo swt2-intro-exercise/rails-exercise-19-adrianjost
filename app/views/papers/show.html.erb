@@ -17,7 +17,7 @@
 
 <% if @paper.authors.count != 0 %>
 <p>
-  <strong><%= "Author".pluralize(@paper.authors.count) %>:</strong>
+  <strong><%= "Author".pluralize(@paper.authors.count) %>:</strong><br/>
   <% @paper.authors.each do |author| %>
     <%= author.name %><br/>
   <% end %>

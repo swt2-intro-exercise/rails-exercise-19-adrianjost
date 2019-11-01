@@ -41,4 +41,9 @@ describe "New author page", type: :feature do
     find('input[type="submit"]').click
     expect(page).to have_text('Last name can\'t be blank')
   end
+
+  it "should have back button" do
+    visit new_author_path
+    expect(page).to have_css("a[href='#{authors_path}']")
+  end
 end

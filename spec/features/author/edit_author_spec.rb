@@ -28,4 +28,8 @@ describe "New author page", type: :feature do
     expect(page).to have_text('Last name can\'t be blank')
   end
 
+  it "should have back button" do
+    visit edit_author_path(@author)
+    expect(page).to have_css("a[href='#{authors_path}']")
+  end
 end

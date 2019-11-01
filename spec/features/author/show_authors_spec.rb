@@ -15,17 +15,17 @@ describe "Show author page", type: :feature do
   end
 
   it "should link to author edit" do
-    visit authors_path
-    expect(find(:table_row, {"Name" => @author.name}, {})).to have_link(href: edit_author_path(@author))
+    visit author_path(@author)
+    expect(page).to have_link(href: edit_author_path(@author))
   end
 
   it "should show a delete link" do
-    visit authors_path
-    expect(find(:table_row, {"Name" => @author.name}, {})).to have_css("a[data-method='delete'][href='#{author_path(@author)}']")
+    visit author_path(@author)
+    expect(page).to have_css("a[data-method='delete'][href='#{author_path(@author)}']")
   end
 
   it "should destroy the author" do
-    visit authors_path
+    visit author_path(@author)
     @authorsBefore = Author.count
     page.driver.submit :delete, author_path(@author), {}
     expect(Author.exists?(@author.id)).to be false

@@ -34,4 +34,17 @@ describe "Show author index page", type: :feature do
     visit authors_path
     expect(find(:table_row, {"Name" => @author.name}, {})).to have_link(href: edit_author_path(@author))
   end
+
+  it "should show a delete link" do
+    visit authors_path
+    expect(find(:table_row, {"Name" => @author.name}, {})).to have_css("a[data-method='delete'][href='#{author_path(@author)}']")
+  end
+
+  it "should destroy the author" do
+    visit authors_path
+    @authorsBefore = Author.count
+    page.driver.submit :delete, author_path(@author), {}
+    expect(Author.exists?(@author.id)).to be false
+    expect(@authorsBefore - Author.count).to be 1
+  end
 end

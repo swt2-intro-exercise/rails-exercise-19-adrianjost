@@ -29,4 +29,9 @@ describe "Show author index page", type: :feature do
     visit authors_path
     expect(find(:table_row, {"Name" => @author.name}, {})).to have_link(href: author_path(@author))
   end
+
+  it "should link to author edit" do
+    visit authors_path
+    expect(find(:table_row, {"Name" => @author.name}, {})).to have_link(href: edit_author_path(@author))
+  end
 end

@@ -17,6 +17,7 @@ class PapersController < ApplicationController
 
   # GET /papers/1/edit
   def edit
+    @authors_of_paper = get_ids_of_authors(Paper.find(params["id"]))
   end
 
   # POST /papers
@@ -63,6 +64,14 @@ class PapersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def paper_params
       params.require(:paper).permit(:title, :venue, :year, author_ids: [])
+    end
+
+    def get_ids_of_authors(paper)
+      ids = Array.new
+      for author in paper.authors
+        ids.push (author.id)
+      end
+      return ids
     end
 
     #update author manually (only way I got it working)
